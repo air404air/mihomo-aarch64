@@ -23,7 +23,7 @@ wget -O "$PKG_FILE" "$PKG_URL"
 echo "[4/8] Установка mihomo..."
 opkg install "$PKG_FILE" || opkg install --force-depends "$PKG_FILE"
 
-echo "[5/8] Установка Web UI MetaCubeXD..."
+echo "[5/8] Установка Web UI (MetaCubeXD)..."
 rm -rf "$UI_DIR"
 mkdir -p "$UI_DIR"
 cd /tmp
@@ -93,12 +93,11 @@ echo "[8/8] Запуск mihomo..."
 "$INIT_FILE" stop >/dev/null 2>&1 || true
 "$INIT_FILE" start
 
-ROUTER_IP="$(ip route get 1.1.1.1 2>/dev/null | awk '{for(i=1;i<=NF;i++) if($i=="src") print $(i+1)}' | head -n1)"
-
 echo
 echo "Готово."
+echo
 echo "Панель:"
-echo "  http://${ROUTER_IP:-IP_РОУТЕРА}:9090/ui"
+echo "  http://IP_РОУТЕРА:9090/ui"
 echo
 echo "Команды:"
 echo "  /opt/etc/init.d/S99mihomo start"
@@ -107,3 +106,4 @@ echo "  /opt/etc/init.d/S99mihomo restart"
 echo
 echo "Конфиг:"
 echo "  /opt/etc/mihomo/config.yaml"
+echo
